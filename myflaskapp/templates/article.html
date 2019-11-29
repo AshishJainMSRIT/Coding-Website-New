@@ -1,0 +1,37 @@
+{% extends 'layout.html'%}
+
+{% block body %}
+  <h1>{{article.title}}</h1>
+  <small>Written by {{article.author}} on {{article.create_date}}</small>
+  <hr>
+  <div>
+      <p >{{article.body | safe}}</p>
+  </div>
+  
+  {% if session.logged_in %}
+  <h3>Write Code</h3>
+  {% from 'includes/_formhelpers.html' import render_field %}
+  
+  <form action="{{url_for('write_code')}}" method="POST">
+    <div class="form-group">
+        <select name="language">
+          <option value="Python">Python</option>
+          <option value="Python3">Python 3</option>
+          <option value="C">C</option>
+          <option value="Cpp">C++</option>
+          <option value="Cpp14">C++14</option>
+          <option value="Java">Java</option>
+          </select>
+    </div>
+    <div class="form-group">
+        <textarea name="body1" style="width: 800px; height: 400px;"></textarea>
+    </div>
+    <div class="form-group">
+        <h3>Input</h3>
+        <textarea placeholder="Input Goes Here..." name="input_val" style="width:250px;height:150px;"></textarea>
+    </div>
+      <input type="hidden" name="id" value='{{article.id}}'>
+      <input type="submit" value="Run" class="btn btn-primary">
+  </form>
+  {% endif %}
+{% endblock %}

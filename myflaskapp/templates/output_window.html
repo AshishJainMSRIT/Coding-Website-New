@@ -1,0 +1,21 @@
+{% extends 'layout.html'%}
+
+{% block body %}
+  <h2>Output:</h2>
+  {% if s['cmpError']=='' %}
+      {% if s['rntError'] == '' %}
+        {{ s['output'] }}
+        <hr>
+        <div>
+          <h3>Time taken:</h3>
+            {{ s['time']}}
+        </div>
+      {% else %}
+        {{ s['rntError'] }}
+      {% endif %}
+  {%else %}
+   {{ s['cmpError']}}
+  {%endif %}
+  
+
+  {% endblock%}
